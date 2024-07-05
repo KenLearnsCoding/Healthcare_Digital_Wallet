@@ -1,0 +1,114 @@
+<%- include('head.ejs') %>
+
+<nav>
+    <img class="logo" src="Assets/logo.png" alt="logo">
+    <ul>
+        <li><a href="https://www.ledger.com/academy/what-is-web-30-everything-you-need-to-know" target="_blank">Learn about web 3.0</a></li>
+        <li><a href="/">Logout</a></li>
+    </ul>
+</nav>
+<div class="container__profile">
+    <div class="welcome">
+        <h1 class="text-header">Profile</h1>
+    </div>
+    <% if (user && user.insuranceId) { %>
+        <div class="profile">
+            <div class="profile__info">
+                <h2 class="profile__info__header">Wallet Information</h2>
+                <p class="profile__info__text">Wallet Address: <%= user.walletAddress.substring(0, 10) %>...<%= user.walletAddress.substring(user.walletAddress.length - 10) %></p>
+                <p class="profile__info__text">Insurance ID: <%= user.insuranceId %></p>
+                <p class="profile__info__text">Insurance Date: <%= user.insuranceDate %></p>
+                <p class="profile__info__text">Health Status: <%= user.healthStatus %></p>
+                <p class="profile__info__text">Date of Birth: <%= user.dateOfBirth %></p>
+                <p class="profile__info__text">Phone Number: <%= user.phoneNumber %></p>
+            </div>
+            <!-- <div class="buttonfield">
+                <button id="changeDataButton">Change Data</button>
+                <button id="shareData">Share data</button>
+            </div> -->
+        </div>
+        <div class="dataControl">
+            <div class="changeDataForm">
+                <form action="/create-transaction" method="post" class="form" onsubmit="console.log('Form submitted')">
+                    <input type="hidden" id="walletAddress" name="walletAddress" value="<%= user.walletAddress %>">
+                    <div class="form-group">
+                        <label for="insuranceId">Insurance ID:</label>
+                        <input type="text" id="insuranceId" name="insuranceId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="insuranceDate">Insurance Date:</label>
+                        <input type="date" id="insuranceDate" name="insuranceDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthStatus">Health Status:</label>
+                        <input type="text" id="healthStatus" name="healthStatus" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="privateKey">Private Key:</label>
+                        <input type="text" id="privateKey" name="privateKey" required>
+                    </div>
+                    <button type="submit">Confirm Update</button>
+                </form>
+            </div>
+
+            <div class="profile">
+                <form action="/create-transaction" method="post" class="form" onsubmit="console.log('Form submitted')">
+                    <div class="form-group">
+                        <label for="receiver">Receiver Address:</label>
+                        <input type="text" id="receiverAddress" name="receiverAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="privateKey">Private Key:</label>
+                        <input type="text" id="privateKey" name="privateKey" required>
+                    </div>
+                     <button type="submit">Confirm Share</button>
+                </form>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="profile">
+            <h2 class="profile__info__header">Wallet Information</h2>
+            <p class="profile__info__text">Wallet Address: <%= user.walletAddress.substring(0, 10) %>...<%= user.walletAddress.substring(user.walletAddress.length - 10) %></p>
+            <form action="/create-transaction" method="post" class="form" onsubmit="console.log('Form submitted')">
+                <input type="hidden" id="walletAddress" name="walletAddress" value="<%= user.walletAddress %>">
+                <div class="form-group">
+                    <label for="insuranceId">Insurance ID:</label>
+                    <input type="text" id="insuranceId" name="insuranceId" required>
+                </div>
+                <div class="form-group">
+                    <label for="insuranceDate">Insurance Date:</label>
+                    <input type="date" id="insuranceDate" name="insuranceDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="healthStatus">Health Status:</label>
+                    <input type="text" id="healthStatus" name="healthStatus" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="privateKey">Private Key:</label>
+                    <input type="text" id="privateKey" name="privateKey" required>
+                </div>
+                <button type="submit">Confirm</button>
+            </form>
+        </div>        
+    <% } %>
+
+    
+</div>
+
+
